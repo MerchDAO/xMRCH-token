@@ -2,9 +2,7 @@
 pragma solidity ^0.7.6;
 pragma experimental ABIEncoderV2;
 
-import "./Ownable.sol";
-
-contract XMRCH is Ownable {
+contract XMRCH {
     /// @notice EIP-20 token name for this token
     string public constant name = "xMRCH DAO Token";
 
@@ -298,12 +296,5 @@ contract XMRCH is Ownable {
         uint256 chainId;
         assembly { chainId := chainid() }
         return chainId;
-    }
-
-    function mint(uint96 amount) external onlyOwner {
-        totalSupply = totalSupply + uint(amount);
-        balances[msg.sender] = add96(balances[msg.sender], amount, "xMRCH::mint: transfer amount overflows");
-
-        emit Transfer(address(0), msg.sender, amount);
     }
 }
